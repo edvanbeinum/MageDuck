@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ $# -eq 0 ] 
+then
+	echo usage: ./mageduck FILEPATH
+	exit 1
+fi
+
+sed '
+/`log_/,/;/ s/^INSERT.*//
+/`.*_cache.*`/,/;/ s/^INSERT.*//
+/^--.*/ d
+' <$1 >$1.clean
